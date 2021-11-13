@@ -35,6 +35,47 @@ def dilation_erosion(x, n, kernel_size = 3, erode_iterations = 1, dilate_iterati
         x = cv.erode(x, matrix_of_ones, iterations = erode_iterations)
     return x
 
+def processed(image):
+    grayscaled = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+    blurred = cv.GaussianBlur(grayscaled, (5,5), 0)
+    thresholded = cv.Canny(blurred, threshold1 = 200, threshold2 = 200)    
+    return thresholded
+
+# https://stackoverflow.com/questions/37177811/crop-rectangle-returned-by-minarearect-opencv-python
+def crop_minAreaRect(img, rect):
+
+    # rotate img
+    angle = rect[2]
+    rows,cols = img.shape[0], img.shape[1]
+    M = cv2.getRotationMatrix2D((cols/2,rows/2),angle,1)
+    img_rot = cv2.warpAffine(img,M,(cols,rows))
+
+    # rotate bounding box
+    rect0 = (rect[0], rect[1], 0.0) 
+    box = cv2.boxPoints(rect0)
+    pts = np.int0(cv2.transform(np.array([box]), M))[0]    
+    pts[pts < 0] = 0
+
+    # crop
+    img_crop = img_rot[pts[1][1]:pts[0][1], 
+                       pts[1][0]:pts[2][0]]
+
+    return img_crop
+
+# https://stackoverflow.com/questions/11627362/how-to-straighten-a-rotated-rectangle-area-of-an-image-using-opencv-in-python/48553593#48553593
+def getSubImage(src, rect):
+    # Get center, size, and angle from rect
+    center, size, theta = rect
+    # Convert to int 
+    center, size = tuple(map(int, center)), tuple(map(int, size))
+    # Get rotation matrix for rectangle
+    M = cv2.getRotationMatrix2D( center, theta, 1)
+    # Perform rotation on src image
+    dst = cv2.warpAffine(src, M, src.shape[:2])
+    out = cv2.getRectSubPix(dst, size, center)
+    return out
+
+
 """ PRZETWARZANIE KART """
 def card_rank(id_card_rank):
     return {
@@ -78,18 +119,37 @@ def card_contouring(filepath):
     img = cv.resize(img, dim, interpolation=cv.INTER_AREA)
     imgray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     
-    # imgray = cv.GaussianBlur(imgray, (3,3), 0, borderType = cv2.BORDER_CONSTANT)
+    imgray = cv.GaussianBlur(imgray, (5,5), 0, borderType = cv.BORDER_CONSTANT)
+    imgray = cv.GaussianBlur(imgray, (5,5), 0, borderType = cv.BORDER_CONSTANT)
+
     ret, thresh = cv.threshold(imgray, 127, 255, 0)
     thresh = erosion_dilation(thresh, 10)
+
     contours, hierarchy = cv.findContours(thresh, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-    print(contours)
-    print('---')
-    print(hierarchy)
+
+
+    for i, c in enumerate(contours):
+        img_copy = img.copy()
+        # get the bounding rect
+        # x, y, w, h = cv.boundingRect(c)
+        rect = cv.minAreaRect(c)
+        img_cropped = getSubImage(img_copy, rect)
+        # to save the images
+        cv.imwrite('./cards_cropped_from_img/img_{}.jpg'.format(i), img_cropped)
+        # cv.imwrite('./cards_cropped_from_img/img_{}.jpg'.format(i), img[y:y+h,x:x+w])
+
+
     # cv.putText(img, "jakis tekst", (500,375), cv.FONT_HERSHEY_COMPLEX, 1.0, WHITE, 2)
     
     print(len(contours)) # number of detected countours, ~ ideally number of detected cards
-    cv.drawContours(img, contours, -1, GREEN ,3)
-    show(img) # TODO: switch to matplotlib for showing multiple images
+    cv.drawContours(img, contours,  -1, GREEN, 3)
+
+    # Displaying the results     
+    cv.imshow('', img)
+    cv.waitKey(0)
+    cv.destroyAllWindows()
+
+    # TODO: switch to matplotlib for showing multiple images
     return img
 
 def main(path):
@@ -112,9 +172,10 @@ def process_selected_images(path, selected_images):
         card_contouring(path+filename)
 
 if __name__ == '__main__':
-    WIDTH = 1600
-    HEIGHT = 900
+    WIDTH = 500
+    HEIGHT = 500
     PATH = './karty/'
-    selected_images = ['dwie_pary.jpg','krol_karo.jpg']
 
-    process_selected_images(PATH, selected_images)
+
+    selected_images = ['dwie_pary.jpg','as_pik.jpg','krol_karo.jpg'] 
+    process_selected_images(PATH, selected_images) # FIXME: processes only the first element in the list, due to cv.waitKey(0) and cv.destroyAllWindows() 
