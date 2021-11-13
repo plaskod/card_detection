@@ -1,1 +1,1 @@
-# card_detection
+# Projekt KCK
