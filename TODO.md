@@ -22,5 +22,5 @@
 ## Co wymaga posprzątania na śmietnisku kodu zwanym main_Dawida.py?
 **Wy śmiałkowie, którzy odważycie się zapuścić w main_Dawida.py pamiętajcie, aby sugerować się znacznikami "#TODO" i "#FIXME", a być może uda Wam się przeżyć w kontakcie z BUG-ami i Runtime error-ami**  
 * przez cv.waitKey(0) i cv.destroyAllWindows() wyświetlane jest tylko jedno zdjęcie, pomimo prób przetworzenia wielu zdjęć naraz z listy selected_images za pomocą process_selected_images, najprawdopodobniej trzeba będzie zapisywać przetworzone obrazy jako matplotlib figure (jak z labów z samolotami)
-* no pewnie się przyda klasa Card dziedzicząca po klasie Image, ale to wyjdzie później
+* może się przyda klasa Card dziedzicząca po klasie Image, ale ta potrzeba wyjdzie później
 
