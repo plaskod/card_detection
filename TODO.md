@@ -1,5 +1,8 @@
 # Pomysły, co trzeba zrobić
 
+
+
+## Jakie zdjęcia zrobić?
 * Więcej zdjęć to zawsze lepiej niż mniej zdjęć - Paulo Coelho
 * Zdjęcie kart na białym tle (trudne pod thresholding pomiędzy kartą, a tłem)
 * Zdjęcia kart pokrywających się nawzajem (trudne pod wycięcie kart z obrazka, "rank" i "suit" mogą być niewidoczne i niweczyć kolejne kroki: wycinania rogu karty pod klasyfikator)
