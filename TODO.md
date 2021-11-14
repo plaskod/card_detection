@@ -2,7 +2,7 @@
 
 * Więcej zdjęć to zawsze lepiej niż mniej zdjęć - Paulo Coelho
 * Zdjęcie kart na białym tle (trudne pod thresholding pomiędzy kartą, a tłem)
-* Zdjęcia kart pokrywających się nawzajem (trudne pod wycięcie kart z obrazka, "rank" i "suit" mogą być niewidoczne i psuć kolejny krok w wycinaniu rogu karty)
+* Zdjęcia kart pokrywających się nawzajem (trudne pod wycięcie kart z obrazka, "rank" i "suit" mogą być niewidoczne i niweczyć kolejne kroki: wycinania rogu karty pod klasyfikator)
 
 ## artykuł 1: https://digital.liby.waikato.ac.nz/conferences/ivcnz07/papers/ivcnz07-paper51.pdf
 ## artykuł 2: https://web.fe.up.pt/~niadr/PUBLICATIONS/LIACC_publications_2011_12/pdf/C62_Poker_Vision_Playing_PM_LPR_LFT.pdf
