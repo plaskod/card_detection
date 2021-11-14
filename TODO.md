@@ -1,11 +1,13 @@
 # Pomysły, co trzeba zrobić
 
-# PLAN: 
+
 ## artykuł: https://digital.liby.waikato.ac.nz/conferences/ivcnz07/papers/ivcnz07-paper51.pdf
+## artykuł 2: https://web.fe.up.pt/~niadr/PUBLICATIONS/LIACC_publications_2011_12/pdf/C62_Poker_Vision_Playing_PM_LPR_LFT.pdf
 
+
+# PLAN: 
 * w oparciu o wykryte kontury wycinamy każdą kartę z obrazka (przykładowe wycięte karty dla "dwie_pary.jpg" w folderze "cards_cropped_from_img")
-* z wyciętych kart -> patrzymy na lewy górny róg (może kolejne wycięcie?) -> klasyfikacja górnego znaku "rank" i dolnego znaku "suit" (karta z "10" będzie odrobinę problematyczna ze względu na min 3 kontury w najlepszym przypadku)
-
+* z wyciętych kart -> patrzymy na lewy górny/ prawy dolny róg (może kolejne wycięcie?) -> **klasyfikacja** górnego znaku "rank" i dolnego znaku "suit" (karta z "10" będzie odrobinę problematyczna ze względu na min 3 kontury w najlepszym przypadku)
 
 
 ## Klasyfikacja znaku na karcie
