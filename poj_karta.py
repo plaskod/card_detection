@@ -32,7 +32,7 @@ def dilation_erosion(x, n, kernel_size = 3, erode_iterations = 1, dilate_iterati
 
 
 if __name__ == '__main__':
-    img = cv.imread("cards_cropped_from_img/img_1.jpg")
+    img = cv.imread("cards_cropped_from_img/img_4.jpg")
 
     width = 1000
     height = 750
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     thresh = cv.erode(thresh, np.ones((3, 3), np.uint8), iterations=3)
     contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
     # cv.putText(img, "jakis tekst", (500,375), cv.FONT_HERSHEY_COMPLEX, 1.0, (255, 255, 255), 2)
-    print(len(contours)) # number of detected countours, ~ ideally number of detected cards
+     # number of detected countours, ~ ideally number of detected cards
     for i in range(len(contours)):
         M = cv2.moments(contours[i])
         try:
@@ -56,8 +56,9 @@ if __name__ == '__main__':
             cY = int(M["m01"] / M["m00"])
         except ZeroDivisionError:
             cY = int(M["m01"] / 1)
-        print(cX, cY)
-        if cX < 145 and cY < 200:
+        if cX < 145 and cY < 200 and cX != 0 and cY != 0:
+            print(cX, cY)
+            print(i)
             cv.drawContours(img, contours, i, GREEN ,3)
 
 
