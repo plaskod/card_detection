@@ -205,6 +205,3 @@ if __name__ == '__main__':
     selected_images = ['dwie_pary.jpg', 'dwie.jpg', 'as_pik.jpg', 'krol_karo.jpg']
     process_selected_images(PATH,
                             selected_images)  # FIXME: processes only the first element in the list, due to cv.waitKey(0) and cv.destroyAllWindows()
-"""
-cv.cornerHarris() - na wykrywanie krawędzi
-"""
