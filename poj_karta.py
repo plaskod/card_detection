@@ -32,16 +32,16 @@ def dilation_erosion(x, n, kernel_size = 3, erode_iterations = 1, dilate_iterati
 
 
 if __name__ == '__main__':
-    img = cv.imread("cards_cropped_from_img/img_4.jpg")
+    img = cv.imread("cards_cropped_from_img/img_0.jpg")
 
-    width = 1000
-    height = 750
+    width = 500
+    height = 500
     dim = (width, height)
     img = cv.resize(img, dim, interpolation=cv.INTER_AREA)
     imgray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     ret, thresh = cv.threshold(imgray, 140, 255, 0)
     thresh = erosion_dilation(thresh, 5)
-    thresh = cv.erode(thresh, np.ones((3, 3), np.uint8), iterations=3)
+    thresh = cv.erode(thresh, np.ones((3, 3), np.uint8), iterations=1)
     contours, hierarchy = cv.findContours(thresh, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
     # cv.putText(img, "jakis tekst", (500,375), cv.FONT_HERSHEY_COMPLEX, 1.0, (255, 255, 255), 2)
      # number of detected countours, ~ ideally number of detected cards
@@ -56,10 +56,9 @@ if __name__ == '__main__':
             cY = int(M["m01"] / M["m00"])
         except ZeroDivisionError:
             cY = int(M["m01"] / 1)
-        if cX < 145 and cY < 200 and cX != 0 and cY != 0:
-            print(cX, cY)
-            print(i)
+        if cX < 100 and cY < 150 and cX != 0 and cY != 0:
             cv.drawContours(img, contours, i, GREEN ,3)
+            (print("Ok"))
 
 
     cv.imshow("Karta", img)
