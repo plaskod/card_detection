@@ -142,7 +142,8 @@ def card_contouring(filepath):
     dim = (WIDTH, HEIGHT)
     img = cv.resize(img, dim, interpolation=cv.INTER_AREA)
     imgray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    imgray = erosion_dilation(imgray, 20)
+    imgray = cv.erode(imgray, np.ones((3,3), np.uint8), iterations=1)
+    imgray = erosion_dilation(imgray, 10)
     imgray = cv.GaussianBlur(imgray, (5, 5), 0, borderType=cv.BORDER_CONSTANT)
     imgray = cv.GaussianBlur(imgray, (5, 5), 0, borderType=cv.BORDER_CONSTANT)
 
@@ -198,7 +199,7 @@ def process_selected_images(path, selected_images):
 
 
 if __name__ == '__main__':
-    WIDTH = 1000
+    WIDTH = 750
     HEIGHT = 750
     PATH = './karty/'
 
