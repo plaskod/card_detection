@@ -161,7 +161,7 @@ def card_contouring(filepath):
         if(img_cropped.shape[0] < img_cropped.shape[1]):
             img_cropped = cv.rotate(img_cropped, cv.ROTATE_90_CLOCKWISE)
         # to save the images
-        cv.imwrite('./cards_cropped_from_img/img_{}.jpg'.format(i), img_cropped)
+        # cv.imwrite('./cards_cropped_from_img/img_{}.jpg'.format(i), img_cropped)
         # cv.imwrite('./cards_cropped_from_img/img_{}.jpg'.format(i), img[y:y+h,x:x+w])
 
     # cv.putText(img, "jakis tekst", (500,375), cv.FONT_HERSHEY_COMPLEX, 1.0, WHITE, 2)
