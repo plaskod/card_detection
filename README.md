@@ -1,3 +1,7 @@
 # Projekt KCK
+## Rozpoznawanie kart i ustawień pokerowych  
 
-# **Nic tu nie ma, czytajcie TODO.md**
+
+Dawid Plaskowski - 139758  
+Martyna Jędrzejczyk - 145754  
+Łukasz Rzepecki - 145276  
