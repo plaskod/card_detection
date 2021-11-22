@@ -405,15 +405,18 @@ PATH = './karty/bledy/'
 
 def main():
 
-    selected_images = os.listdir('./karty/bledy')
+    foldery = ['latwe', 'srednie', 'trudne']
 
-    for filename in selected_images:
-        # detekcja kart w konstruktorze
-        board = Board(PATH + filename)
-        board.label_cards()  # tutaj jest odkomentowany show(img)
-        board.label_set()
-        board.get_board()
-        print('----------------------------------')
+    for jakie in foldery:
+        PATH = './karty/' + jakie + '/'
+        selected_images = os.listdir('./karty/' + jakie + '/')
+        for filename in selected_images:
+            # detekcja kart w konstruktorze
+            board = Board(PATH + filename)
+            board.label_cards()  # tutaj jest odkomentowany show(img)
+            board.label_set()
+            board.get_board()
+        print(jakie, '----------------------------------')
 
 
 if __name__ == '__main__':
